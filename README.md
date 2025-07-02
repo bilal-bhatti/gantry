@@ -1,4 +1,4 @@
 scuid-Kasba
 =============
 
-SCUID Lifecycle Kasba
+Akkah based message broker.

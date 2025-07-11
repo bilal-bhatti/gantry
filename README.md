@@ -1,4 +1,4 @@
-scuid-Kasba
+kasba
 =============
 
 Akkah based message broker.

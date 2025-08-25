@@ -1,4 +1,4 @@
-kasba
+gantry
 =============
 
-Akkah based message broker.
+Akka gantry project using gradle (groovy)

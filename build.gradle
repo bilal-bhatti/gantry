@@ -1,18 +1,11 @@
 plugins {
     id 'war'
     id 'java'
-    id 'checkstyle'
 }
 
 group 'com.alchemain'
 version '0.1'
-description 'Kasba Messaging System'
-
-// Add wrapper task
-task wrapper(type: Wrapper) {
-    gradleVersion = '7.5.1'
-    distributionType = Wrapper.DistributionType.ALL
-}
+description 'Gantry'
 
 repositories {
     mavenCentral()
@@ -39,7 +32,7 @@ ext {
 
 dependencies {
     providedCompile 'javax.servlet:servlet-api:2.5'
-    implementation 'com.logentries:logentries-appender:RELEASE'
+    implementation 'com.logentries:logentries-appender:1.1.32'
     implementation "com.typesafe.akka:akka-actor_2.11:$akkaVersion"
     implementation "com.sun.jersey.contribs:jersey-guice:$jerseyVersion"
     implementation("com.sun.jersey:jersey-json:$jerseyVersion") {
@@ -76,10 +69,6 @@ dependencies {
     implementation 'redis.clients:jedis:2.6.2'
 }
 
-checkstyle {
-    configFile = file('config/checkstyle.xml')
-}
-
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
     sourceCompatibility = '8'
@@ -87,7 +76,7 @@ tasks.withType(JavaCompile) {
 }
 
 war {
-    archiveFileName = 'Kasba.war'
+    archiveFileName = 'gantry.war'
 }
 
 test {

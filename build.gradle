@@ -1,0 +1,89 @@
+plugins {
+    id 'war'
+    id 'java'
+    id 'checkstyle'
+}
+
+group 'com.alchemain'
+version '0.1'
+description 'Kasba Messaging System'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    akkaVersion = '2.3.2'
+    codecVersion = '1.9'
+    esVersion = '5.6.15'
+    groovyVersion = '2.1.8'
+    guavaVersion = '15.0'
+    guiceVersion = '3.0'
+    hcFluentVersion = '4.3.4'
+    jacksonVersion = '2.3.5'
+    javassistVersion = '3.18.1-GA'
+    jongoVersion = '1.0'
+    jsonPatchVersion = '1.7'
+    jerseyVersion = '1.17.1'
+    junitVersion = '4.10'
+    logbackVersion = '1.0.13'
+    slf4jVersion = '1.7.5'
+    mongoDriverVersion = '2.11.3'
+}
+
+dependencies {
+    providedCompile 'javax.servlet:servlet-api:2.5'
+    implementation 'com.logentries:logentries-appender:RELEASE'
+    implementation "com.typesafe.akka:akka-actor_2.11:$akkaVersion"
+    implementation "com.sun.jersey.contribs:jersey-guice:$jerseyVersion"
+    implementation("com.sun.jersey:jersey-json:$jerseyVersion") {
+        exclude group: 'com.sun.xml.bind', module: 'jaxb-impl'
+        exclude group: 'org.codehaus.jettison', module: 'jettison'
+        exclude group: 'org.codehaus.jackson', module: 'jackson-jaxrs'
+        exclude group: 'org.codehaus.jackson', module: 'jackson-core-asl'
+        exclude group: 'org.codehaus.jackson', module: 'jackson-mapper-asl'
+        exclude group: 'org.codehaus.jackson', module: 'jackson-xc'
+    }
+    implementation "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:$jacksonVersion"
+    implementation "com.google.inject:guice:$guiceVersion"
+    implementation 'it.sauronsoftware.cron4j:cron4j:2.2.5'
+    implementation 'com.nebhale.jsonpath:jsonpath:1.2'
+    implementation "org.elasticsearch:elasticsearch:$esVersion"
+    implementation "org.elasticsearch.client:transport:$esVersion"
+    testImplementation "junit:junit:$junitVersion"
+    implementation "ch.qos.logback:logback-classic:$logbackVersion"
+    implementation "org.slf4j:slf4j-api:$slf4jVersion"
+    implementation "org.slf4j:log4j-over-slf4j:$slf4jVersion"
+    implementation "org.slf4j:jcl-over-slf4j:$slf4jVersion"
+    implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+    implementation "com.google.guava:guava:$guavaVersion"
+    implementation("org.apache.httpcomponents:fluent-hc:$hcFluentVersion") {
+        exclude group: 'commons-codec', module: 'commons-codec'
+    }
+    implementation "commons-codec:commons-codec:$codecVersion"
+    implementation "com.github.fge:json-patch:$jsonPatchVersion"
+    implementation "org.javassist:javassist:$javassistVersion"
+    implementation "org.mongodb:mongo-java-driver:$mongoDriverVersion"
+    implementation "org.jongo:jongo:$jongoVersion"
+    implementation 'javax.ws.rs:jsr311-api:1.1.1'
+    implementation 'redis.clients:jedis:2.6.2'
+}
+
+checkstyle {
+    configFile = file('config/checkstyle.xml')
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    sourceCompatibility = '8'
+    targetCompatibility = '8'
+}
+
+war {
+    archiveFileName = 'Kasba.war'
+}
+
+test {
+    enabled = false
+}

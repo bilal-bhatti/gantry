@@ -8,6 +8,12 @@ group 'com.alchemain'
 version '0.1'
 description 'Kasba Messaging System'
 
+// Add wrapper task
+task wrapper(type: Wrapper) {
+    gradleVersion = '7.5.1'
+    distributionType = Wrapper.DistributionType.ALL
+}
+
 repositories {
     mavenCentral()
 }
